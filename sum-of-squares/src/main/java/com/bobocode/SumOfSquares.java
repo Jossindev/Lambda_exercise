@@ -3,6 +3,9 @@ package com.bobocode;
 
 import com.bobocode.exception.InvalidRangeException;
 
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
 
 /**
  * This class allow to calculate a sum of squares of integer number in a certain range. It was implemented using
@@ -26,10 +29,13 @@ public class SumOfSquares {
         }
 
         // todo: refactor using functional approach
-        int sumOfSquares = 0;
-        for (int i = startInclusive; i <= endInclusive; i++) {
-            sumOfSquares += i * i;
-        }
-        return sumOfSquares;
+
+
+
+       return IntStream.iterate(startInclusive,i->i+1)
+                .limit(endInclusive-startInclusive+1)
+                .map(i->i*i)
+                .sum();
     }
+
 }
